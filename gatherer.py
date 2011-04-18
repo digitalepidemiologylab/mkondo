@@ -72,3 +72,9 @@ class TwitterStreamListener(tweepy.StreamListener):
 	def on_timeout(self):
 		logger = logging.getLogger(LoggingConfig.APP_LOG)
 		logger.error('A timeout has occured')
+
+	def data_log_name(self):
+		return LoggingConfig.DATA_LOG
+
+	def app_log_name(self):
+		return LoggingConfig.APP_LOG
