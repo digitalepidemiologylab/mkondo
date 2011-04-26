@@ -100,7 +100,7 @@ class CompliantStream(tweepy.Stream):
 			conn.close()
 
 		if exception:
-			raise exception
+			raise 
 
 	def get_http_delay(self, error_count):
 			''' Exponential back-off, based on the number of times we've failed (error_count) '''
