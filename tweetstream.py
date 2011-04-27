@@ -71,7 +71,7 @@ class CompliantStream(tweepy.Stream):
 					error_counter += 1
 					#HTTP delay is based on error count, since we have exponential back-off
 					http_delay = self.get_http_delay(error_counter)
-					logger.debug('HTTP Delay. Sleeping for: %s' % tcp_ip_delay)
+					logger.debug('HTTP Delay. Sleeping for: %s' % http_delay)
 					sleep(http_delay)
 				else:
 					error_counter = 0
@@ -89,6 +89,17 @@ class CompliantStream(tweepy.Stream):
 				tcp_ip_delay = self.get_tcp_ip_delay(error_counter)
 				logger.error('TCP/IP Delay. Sleeping for: %s' % tcp_ip_delay)
 				sleep(tcp_ip_delay)
+			except httplib.IncompleteRead:
+				logger.exception('Incomplete Read.')
+
+				#We assume there are connection issues at the other end, so we'll 
+				#try again in a little bit. 
+				error_counter += 1
+				#HTTP delay is based on error count, since we have exponential back-off
+				http_delay = self.get_http_delay(error_counter)
+				logger.debug('HTTP Delay. Sleeping for: %s' % tcp_ip_delay)
+				sleep(http_delay)
+
 			except Exception, exception:
 				logger.exception('Unexpected exception: %s' % exception)
 				# any other exception is fatal, so kill loop
