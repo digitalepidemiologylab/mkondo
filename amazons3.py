@@ -23,13 +23,17 @@ class SimpleStorage:
 		bucket = self.conn.get_bucket(bucket_name)
 		bucket.delete()
 
-	def send_file(self, bucket_name, file_name, path_prefix):
+	#def send_file(self, file_name, bucket_name, path_prefix):
+	def send_file(self, file_name, **kwargs):
 		""" Send the file specified by `file_name` to S3 for storage. """
+		bucket_name = kwargs['bucket_name']
+		path_prefix = kwargs['path_prefix']
+
 		bucket = self.get_bucket(bucket_name)
 	
 		k = Key(bucket)
-
 		key = file_name[len(path_prefix):len(file_name)]
+
 		if key[0] != os.path.sep:
 			key = os.path.sep + key
 
