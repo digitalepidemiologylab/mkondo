@@ -21,6 +21,7 @@ class SimpleBackup:
 			if not self.sub_dirs_only or (not root in self.sub_dirs_only):
 				for f in files:
 					file_name = os.path.join(root, f)
+					print file_name
 					self.backup_helper(file_name, **kwargs)
 					self.shunt(f, root)
 
