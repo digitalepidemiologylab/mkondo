@@ -49,8 +49,9 @@ def move_files(path_prefix, data_files):
 		dest = os.path.join(directory, f)
 		shutil.move(src, dest)
 
-if __name__ == '__main__':
-	(directories, data_files) = get_directory_file_list(settings.DATA_DIRECTORY)
+def shunt(data_directory):
+	#Move the data files into directories for each day
+	(directories, data_files) = get_directory_file_list(data_directory)
 	dir_names = extract_directory_names(data_files)
-	create_directories(settings.DATA_DIRECTORY, dir_names)
-	move_files(settings.DATA_DIRECTORY, data_files)
+	create_directories(data_directory, dir_names)
+	move_files(data_directory, data_files)
