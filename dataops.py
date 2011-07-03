@@ -86,7 +86,7 @@ def today_hyphenated():
 	return datetime.datetime.today().strftime("%Y-%m-%d")
 
 def yesterday():
-	return (datetime.date.today() - datetime.timedelta(days=1).strftime("%Y%m%d"))
+	return (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y%m%d")
 
 def hours_from_file_list(data_files):
 	hours = []
