@@ -1,4 +1,5 @@
 import string
+import unicodedata
 
 #Standard stop words as defined by Lucene. 
 LUCENE_STOPWORDS = ["a", "and", "are", "as", "at", "be", "but", "by",  "for",
@@ -17,3 +18,7 @@ def remove_punctuation_no_exclaim(punctuated):
 def remove_punctuation(punctuated):
 	''' Removes all punctuation.'''
 	return punctuated.translate(string.maketrans("",""), string.punctuation)
+
+def unicode2utf8(text):
+	""" Convert a string from unicode to utf-8. """
+	return unicodedata.normalize('NFKD', text).encode('utf-8', 'ignore') 	
