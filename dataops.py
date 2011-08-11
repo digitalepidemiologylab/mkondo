@@ -20,6 +20,12 @@ class TweetsAnalyzer:
 				if len(line) > 2:
 					self.process_line(line)
 
+	def analyze_file_uncompressed(self, filename):
+		f = open(filename, 'r')
+		for line in f:
+			if len(line) > 2:
+				self.process_line(line)
+
 	def export_data(self):
 		return json.dumps({'tweet_count':self.number_of_tweets})
 
