@@ -20,6 +20,12 @@ class TweetsAnalyzer:
 				if len(line) > 2:
 					self.process_line(line)
 
+	def analyze_file_uncompressed(self, filename):
+		f = open(filename, 'r')
+		for line in f:
+			if len(line) > 2:
+				self.process_line(line)
+
 	def export_data(self):
 		return json.dumps({'tweet_count':self.number_of_tweets})
 
@@ -84,6 +90,9 @@ def today():
 
 def today_hyphenated():
 	return datetime.datetime.today().strftime("%Y-%m-%d")
+
+def yesterday():
+	return (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y%m%d")
 
 def hours_from_file_list(data_files):
 	hours = []
