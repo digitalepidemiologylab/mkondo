@@ -1,5 +1,6 @@
 import tweepy
 import settings
+import time
 
 def get_authenticated_api(consumer_token, consumer_secret, access_token, access_token_secret):
 	''' Return an authenticated API '''
@@ -77,7 +78,11 @@ class ContinualFetcher():
 			self.error_counter += 1
 			self.handle_error_delay()
 		elif '[Errno 60]' in exception.reason:
-			application_log.error('error_code:60 Connection reset by peer')
+			self.applog.error('error_code:60 Connection reset by peer')
+			self.error_counter += 1
+			self.handle_error_delay()
+		elif 'Failed to parse JSON' in exception.reason:
+			self.applog.error('Failed to parse JSON for: %s' % data_id)
 			self.error_counter += 1
 			self.handle_error_delay()
 		else:
