@@ -7,7 +7,8 @@ from socket import error as socket_error
 from time import sleep
 
 class CompliantStream(tweepy.Stream):
-	''' This class extends Tweepy's Stream class by adding HTTP and TCP/IP back-off (according to Twitter's guidelines). '''
+	''' This class extends Tweepy's Stream class by adding HTTP and TCP/IP back-off 
+	(according to Twitter's guidelines). '''
 	DEBUG_LOG = 'Stream'
 
 	def enable_debug(self, stream_log_name):
@@ -38,7 +39,7 @@ class CompliantStream(tweepy.Stream):
 		#Add a couple seconds more wait time. 
 		self.twitter_keepalive += 2.0
 
-		tweepy.Stream.__init__(self, auth, listener, **options)
+		tweepy.Stream.__init__(self, auth, listener, secure=True, **options)
 	
 	def _run(self):
 		url = "%s://%s%s" % (self.scheme, self.host, self.url)
