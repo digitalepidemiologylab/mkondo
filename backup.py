@@ -23,7 +23,6 @@ class SimpleBackup:
 					file_name = os.path.join(root, f)
 					self.backup_helper(file_name, **kwargs)
 					self.shunt(f, root)
-					print file_name
 
 	def shunt(self, filename, directory):
 		source = os.path.join(directory,filename)
