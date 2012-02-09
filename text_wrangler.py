@@ -22,3 +22,9 @@ def remove_punctuation(punctuated):
 def unicode2utf8(text):
 	""" Convert a string from unicode to utf-8. """
 	return unicodedata.normalize('NFKD', text).encode('utf-8', 'ignore') 	
+
+def bag_no_stopwords(text, stopwords=LUCENE_STOPWORDS):
+	""" Take a string, make it a bag of words, and remove specified stop_words"""
+	bag_of_words = text.split()
+	pruned = [w for w in bag_of_words if w not in stopwords]
+	return pruned
