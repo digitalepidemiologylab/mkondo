@@ -22,7 +22,9 @@ class CompliantStream(tweepy.Stream):
 		logger.addHandler(handler)
 
 
-	def __init__(self, auth, listener, retry_count, min_http_delay=10, max_http_delay=240, min_tcp_ip_delay=0.5, max_tcp_ip_delay=16, stream_log_name='stream.log', **options):
+	def __init__(self, auth, listener, retry_count, min_http_delay=10, max_http_delay=240, 
+				min_tcp_ip_delay=0.5, max_tcp_ip_delay=16, stream_log_name='stream.log', **options):
+
 		self.min_http_delay = min_http_delay
 		self.max_http_delay = max_http_delay
 		self.min_tcp_ip_delay = min_tcp_ip_delay
@@ -52,7 +54,7 @@ class CompliantStream(tweepy.Stream):
 		conn = None
 		exception = None
 		while self.running:
-			logger.debug('Loop. Error count: %s' % error_counter)
+			logger.info('Loop. Error count: %s' % error_counter)
 			if self.retry_count and error_counter > self.retry_count:
 				# quit if error count greater than retry count
 				break
@@ -75,6 +77,7 @@ class CompliantStream(tweepy.Stream):
 					logger.debug('HTTP Delay. Sleeping for: %s' % http_delay)
 					sleep(http_delay)
 				else:
+					logger.info('Connection Successful')
 					error_counter = 0
 					http_delay = 0
 					tcp_ip_delay = 0
