@@ -69,6 +69,8 @@ class LocationAnalyzer(TweetsAnalyzer):
 			})
 
 def get_directory_file_list(datadir):
+	""" For a particular path, get a list of directories and files (but only include 
+	gzip'd files."""
 	directory_listing = os.listdir(datadir)
 
 	#separate directories, and data files
@@ -84,6 +86,19 @@ def get_directory_file_list(datadir):
 
 	return (directories, data_files)
 
+def get_all_directory_file_list(datadir):
+	""" For a particular path, get a list of directories, and *all* files."""
+	directory_listing = os.listdir(datadir)
+
+	#separate directories, and data files
+	directories = []
+	data_files = []
+	for d in directory_listing:
+		if os.path.isdir(d):
+			directories.append(d)
+		else:
+			data_files.append(d)
+	return (directories, data_files)
 
 def today():
 	return datetime.datetime.today().strftime("%Y%m%d")
@@ -101,3 +116,8 @@ def hours_from_file_list(data_files):
 		hours.append(h)
 	hours.sort()
 	return hours
+
+def pretty_print_dictionary(dictionary):
+	for key in sorted(dictionary.keys()):
+		output = "%s,%s" % (key, dictionary[key])
+		print output

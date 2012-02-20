@@ -28,3 +28,10 @@ def bag_no_stopwords(text, stopwords=LUCENE_STOPWORDS):
 	bag_of_words = text.split()
 	pruned = [w for w in bag_of_words if w not in stopwords]
 	return pruned
+
+def stem_bag(text):
+	""" Stem the words in a bag of words. This method requires NLTK. """
+	from nltk.stem import PorterStemmer
+	stemmer = PorterStemmer()
+	bag = [stemmer.stem(remove_punctuation(x.lower())) for x in list_of_words]
+	return bag
