@@ -1,2 +1,4 @@
 amazonbackup.py
 local.py
+build/
+dist/
