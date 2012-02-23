@@ -2,3 +2,4 @@ amazonbackup.py
 local.py
 build/
 dist/
+mkondo.egg-info
