@@ -21,3 +21,5 @@ necessary)
 breaks when the hourly limit for REST API calls is reached. 
 
 We use this module to continuously collect data from Twitter with limited downtime. 
+
+khandelwal@psu.edu, salathe@psu.edu
