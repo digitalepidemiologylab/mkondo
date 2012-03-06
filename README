@@ -3,4 +3,18 @@ Mkondo is Kiswahili for 'stream'.
 
 This library contains code that helps download Twitter Streaming API data and manage that data. 
 
-It relies on the Salathegroup's fork of Tweepy (https://github.com/salathegroup/tweepy)
+It relies on the Salathegroup's fork of Tweepy
+(https://github.com/salathegroup/tweepy) which allows the raw JSON received to
+be written out to disk. 
+
+Mkondo provides the following features: 
+
+1. extends Tweepy classes to include appropriate backoffs for Twitter's Streaming API. 
+
+2. code to store and backup tweets from the Streaming API (this includes
+rotating directories and data files when appropriate and logging errors as
+necessary)
+
+3. classes to help parse and analyze the tweets as stored on disk. 
+
+We use this module to continuously collect data from Twitter. 
