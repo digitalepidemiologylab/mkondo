@@ -15,6 +15,9 @@ Mkondo provides the following features:
 rotating directories and data files when appropriate and logging errors as
 necessary)
 
-3. classes to help parse and analyze the tweets as stored on disk. 
+3. classes to help parse and analyze the tweets as stored on disk.
 
-We use this module to continuously collect data from Twitter. 
+4. a class to help use the Twitter REST API continuously, taking appropriate breaks when
+the hourly limit for REST API calls is reached. 
+
+We use this module to continuously collect data from Twitter with limited downtime. 
