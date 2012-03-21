@@ -7,26 +7,12 @@ directory. """
 
 import os
 import shutil
-
-def get_directory_file_list(datadir):
-	directory_listing = os.listdir(datadir)
-
-	#separate directories, and data files
-
-	directories = []
-	data_files = []
-	for d in directory_listing:
-		if os.path.isdir(d):
-			directories.append(d)
-		elif ('gz' in d) or ('log' in d and len(d.split('.')) > 0):
-			#If we're pickuping up uncompressed files, we only want the ones that have been 
-			#rotated. Hence the checking for an extra dot in the file name. 
-			data_files.append(d)
-	return (directories, data_files)
+from mkondo.dataops import get_directory_file_list
 
 def extract_dir_name(data_file_name):
 	""" From the data filename, extract the date """
 	#Example file name: tweets.txt.2011-03-14_04.gz
+	print data_file_name
 	return data_file_name.split('.')[2].split('_')[0].replace('-', '')
 
 def extract_directory_names(data_files):
