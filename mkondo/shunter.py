@@ -18,10 +18,8 @@ def get_directory_file_list(datadir):
 	for d in directory_listing:
 		if os.path.isdir(d):
 			directories.append(d)
-		elif 'gz' in d:
-			#We're only interested in shunting the zipped files
+		elif 'gz' in d or 'log' in d:
 			data_files.append(d)
-
 	return (directories, data_files)
 
 def extract_dir_name(data_file_name):
