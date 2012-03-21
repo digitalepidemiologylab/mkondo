@@ -12,7 +12,6 @@ from mkondo.dataops import get_directory_file_list
 def extract_dir_name(data_file_name):
 	""" From the data filename, extract the date """
 	#Example file name: tweets.txt.2011-03-14_04.gz
-	print data_file_name
 	return data_file_name.split('.')[2].split('_')[0].replace('-', '')
 
 def extract_directory_names(data_files):
