@@ -78,10 +78,11 @@ def get_directory_file_list(datadir):
 	directories = []
 	data_files = []
 	for d in directory_listing:
-		if os.path.isdir(d):
+		if os.path.isdir(os.path.join(datadir, d)):
 			directories.append(d)
-		elif 'gz' in d:
-			#We're only interested in shunting the zipped files
+		elif ('gz' in d) or ('log' in d and len(d.split('.')) > 2):
+			#If we're picking up uncompressed files, we only want the ones that have been 
+			#rotated. Hence the checking for an extra dot in the file name. 
 			data_files.append(d)
 
 	return (directories, data_files)
