@@ -18,7 +18,9 @@ def get_directory_file_list(datadir):
 	for d in directory_listing:
 		if os.path.isdir(d):
 			directories.append(d)
-		elif 'gz' in d or 'log' in d:
+		elif ('gz' in d) or ('log' in d and len(d.split('.')) > 0):
+			#If we're pickuping up uncompressed files, we only want the ones that have been 
+			#rotated. Hence the checking for an extra dot in the file name. 
 			data_files.append(d)
 	return (directories, data_files)
 
