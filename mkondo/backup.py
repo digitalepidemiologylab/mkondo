@@ -13,16 +13,27 @@ class SimpleBackup:
 		self.backup_helper = backup_helper
 		self.base_dir = None
 
-	def backup(self, dir_name, **kwargs):
+	def backup(self, dir_name, file_filter=None, **kwargs):
+		""" 
+			For example, file_filter can be 'gz' if you only want to 
+			backup gzip'ed  files.
+		"""
 		for root, dirs, files in os.walk(dir_name):
 			dirs[:] = [d for d in dirs if not SimpleBackup.PROCESSED_DIR in d]
 			self.base_dir = dir_name
 
 			if not self.sub_dirs_only or (not root in self.sub_dirs_only):
 				for f in files:
-					file_name = os.path.join(root, f)
-					self.backup_helper(file_name, **kwargs)
-					self.shunt(f, root)
+					if file_filter:
+						if file_filter in f:
+							file_name = os.path.join(root, f)
+							self.backup_helper(file_name, **kwargs)
+							self.shunt(f, root)
+					else:
+						file_name = os.path.join(root, f)
+						self.backup_helper(file_name, **kwargs)
+						self.shunt(f, root)
+
 
 	def shunt(self, filename, directory):
 		source = os.path.join(directory,filename)
