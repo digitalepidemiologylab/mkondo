@@ -15,7 +15,7 @@ class LoggingConfig:
 	DATE_FORMAT = '%Y%m%d%H%M%S'
 
 	@staticmethod
-	def configure_data_logging(data_log_name, interval_type='H', interval='1'):
+	def configure_data_logging(data_log_name, interval_type='H', interval=1):
 		''' This configures the logger we use to write out data. '''
 		data_logger = logging.getLogger(LoggingConfig.DATA_LOG)
 		data_logger.setLevel(logging.INFO)
@@ -46,7 +46,7 @@ class TwitterStreamListener(tweepy.StreamListener):
 	""" This class listens to a twitter stream and processes each tweet received. It logs errors 
 	when necessary."""
 
-	def __init__(self, data_log_name, app_log_name, data_interval_type='H', data_interval='1'):
+	def __init__(self, data_log_name, app_log_name, data_interval_type='H', data_interval=1):
 		LoggingConfig.configure_data_logging(data_log_name, data_interval_type, data_interval)
 		LoggingConfig.configure_app_logging(app_log_name)
 
