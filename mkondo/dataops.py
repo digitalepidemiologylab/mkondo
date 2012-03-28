@@ -3,6 +3,31 @@ import os
 import json
 import gzip
 
+from abc import ABCMeta, abstractmethod
+
+class TweetParser:
+	""" This is intended as an abstract base class for parsing the Tweet files based on
+	mkondo's format for writing out tweet data. """
+
+	__metaclass__ = ABCMeta
+
+	def read_tweet_line(self, line):
+		date = line.split('|', 1)[0]
+		json_text = line.split('|', 1)[1]
+		tweet_json = json.loads(json_text)
+		return (date, tweet_json)
+
+	@abstractmethod
+	def process_line(self, line):
+		""" Process a single tweet line. """
+		
+	def analyze_file(self, filename):
+		if 'gz' in filename:
+			f = gzip.open(filename, 'r')
+			for line in f:
+				if len(line) > 2:
+					self.process_line(line)
+
 class TweetsAnalyzer:
 	def __init__(self):
 		self.number_of_tweets = 0
