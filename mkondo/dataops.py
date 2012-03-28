@@ -18,15 +18,15 @@ class TweetParser:
 		return (date, tweet_json)
 
 	@abstractmethod
-	def process_line(self, line):
+	def parse_line(self, line, **kwargs):
 		""" Process a single tweet line. """
 		
-	def parse_file(self, filename):
+	def parse_file(self, filename, **kwargs):
 		if 'gz' in filename:
 			f = gzip.open(filename, 'r')
 			for line in f:
 				if len(line) > 2:
-					self.process_line(line)
+					self.process_line(line, kwargs)
 
 class TweetsAnalyzer:
 	def __init__(self):
