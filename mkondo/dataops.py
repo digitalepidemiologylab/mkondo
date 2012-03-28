@@ -21,7 +21,7 @@ class TweetParser:
 	def process_line(self, line):
 		""" Process a single tweet line. """
 		
-	def analyze_file(self, filename):
+	def parse_file(self, filename):
 		if 'gz' in filename:
 			f = gzip.open(filename, 'r')
 			for line in f:
