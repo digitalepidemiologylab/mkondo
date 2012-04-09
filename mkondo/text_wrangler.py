@@ -17,7 +17,14 @@ def remove_punctuation_no_exclaim(punctuated):
 
 def remove_punctuation(punctuated):
 	''' Removes all punctuation.'''
-	return punctuated.translate(string.maketrans("",""), string.punctuation)
+
+	if isinstance(punctuated, unicode):
+		#If the string is unicode, we need to build a different translate
+		#table. 
+		translate_table = dict((ord(c), None) for c in string.punctuation)
+		return punctuated.translate(translate_table)
+	else:
+		return punctuated.translate(string.maketrans("",""), string.punctuation)
 
 def unicode2utf8(text):
 	""" Convert a string from unicode to utf-8. """
