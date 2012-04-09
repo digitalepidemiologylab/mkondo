@@ -26,7 +26,7 @@ class TweetParser:
 			f = gzip.open(filename, 'r')
 			for line in f:
 				if len(line) > 2:
-					self.process_line(line, kwargs)
+					self.parse_line(line, **kwargs)
 
 class TweetsAnalyzer:
 	def __init__(self):
