@@ -1,5 +1,5 @@
 import tweepy
-from tweepy.parsers import RAWParser
+from tweepy.parsers import RawParser
 import settings
 import time
 
@@ -16,7 +16,7 @@ def get_authenticated_api_raw(consumer_token, consumer_secret, access_token, acc
 	auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 
-	api = tweepy.API(auth, parser=RAWParser)
+	api = tweepy.API(auth, parser=RawParser)
 	return api
 
 
@@ -75,7 +75,7 @@ class ContinualFetcher():
 			elif status == 503:
 				self.applog.warning('error_code:503 Twitter servers are up, but overloaded. Backing off. ')
 				self.error_counter += 1
-				self.handle_error_delay(error_counter)
+				self.handle_error_delay(self.error_counter)
 			else:
 				self.applog.error('Unanticipated response code received: %d' % status)
 				return status
