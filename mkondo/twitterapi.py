@@ -51,7 +51,7 @@ class ContinualFetcher():
 			msg = 'Too many errors in a row encountered'
 			raise Exception(msg)
 		else:
-			sleep_time = BASE_TIME * (2.0 ** error_counter)
+			sleep_time = BASE_TIME * (2.0 ** self.error_counter)
 			time.sleep(sleep_time)
 
 	def handle_rest_errors(self, data_id, exception):
