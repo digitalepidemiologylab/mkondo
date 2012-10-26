@@ -75,7 +75,7 @@ class ContinualFetcher():
 			elif status == 503:
 				self.applog.warning('error_code:503 Twitter servers are up, but overloaded. Backing off. ')
 				self.error_counter += 1
-				self.handle_error_delay(self.error_counter)
+				self.handle_error_delay()
 			elif status == 420:
 				self.applog.warning('error_code:420 Rate limited. ')
 				time.sleep(1800)
